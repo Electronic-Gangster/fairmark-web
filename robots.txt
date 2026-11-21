@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /investor.html
+Disallow: /fairmark-business-plan-v1.pdf

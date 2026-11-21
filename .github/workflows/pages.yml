@@ -1,0 +1,32 @@
+# GitHub Pages로 배포할 때만 사용합니다. Vercel을 쓰면 이 파일은 지워도 됩니다.
+# 저장소 Settings > Pages > Source를 "GitHub Actions"로 설정해야 동작합니다.
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collect site files
+        run: |
+          mkdir _site
+          cp index.html investor.html 404.html robots.txt fairmark-business-plan-v1.pdf _site/
+          cp -r vendor _site/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

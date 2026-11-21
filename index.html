@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>페어마크 | 시험장 무결성 운영 표준</title>
+<meta name="description" content="스마트안경·초소형 카메라 시대의 시험 감독. 자격검정기관과 시험 운영사가 같은 기준으로 확인하고, 2인 확인으로 판정하고, 기록으로 남기도록 돕습니다.">
+<meta name="theme-color" content="#ECEEF1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="페어마크 | 시험장 무결성 운영 표준">
+<meta property="og:description" content="시험장에서 본 것을, 판정할 수 있는 기록으로.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Sans+KR:wght@200..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ECEEF1; --ink:#000; --white:#fff; --blue:#2340FF; --orange:#FF4F17;
+  --mute:#555A63; --line:rgba(0,0,0,.18); --line-d:rgba(255,255,255,.22);
+  --kr:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --disp:"Archivo","Arial Narrow","Helvetica Neue Condensed",Impact,sans-serif;
+  --pad:clamp(18px,3.4vw,52px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html.km{scroll-behavior:auto}
+body{background:var(--paper);color:var(--ink);font-family:var(--kr);font-size:17px;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,svg{display:block}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{padding-inline:var(--pad);max-width:1680px;margin-inline:auto}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.dark :focus-visible,.blue :focus-visible,.menu :focus-visible{outline-color:#fff}
+.skip{position:fixed;left:12px;top:-60px;z-index:100;background:#000;color:#fff;padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:12px}
+.dark{background:#000;color:#fff}
+.blue{background:var(--blue);color:#fff}
+.meta{font-size:13px;line-height:1.5;font-weight:500;letter-spacing:-.005em}
+.h2{font-size:clamp(34px,5.4vw,88px);line-height:1.06;font-weight:800;letter-spacing:-.045em}
+.lead{font-size:clamp(18px,1.6vw,23px);line-height:1.65;letter-spacing:-.02em;max-width:34em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;border-radius:999px;border:2px solid currentColor;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;background:transparent;transition:background .2s,color .2s,transform .2s}
+.btn-ink{background:#000;color:#fff;border-color:#000}
+.btn-ink:hover{background:var(--blue);border-color:var(--blue)}
+.btn-line:hover{background:#000;color:#fff;border-color:#000}
+.dark .btn-line:hover,.blue .btn-line:hover{background:#fff;color:#000;border-color:#fff}
+
+/* top bar: tiny UI against giant type */
+.top{position:fixed;inset:0 0 auto;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad);color:#fff;mix-blend-mode:difference;pointer-events:none}
+.top>*{pointer-events:auto}
+.logo{font-family:var(--disp);font-style:italic;font-weight:900;font-stretch:62%;font-size:26px;line-height:1;letter-spacing:.005em;text-decoration:none;text-transform:uppercase}
+.top-r{display:flex;align-items:center;gap:22px}
+.top-link{font-size:14px;font-weight:600;text-decoration:none}
+.top-link:hover{text-decoration:underline;text-underline-offset:4px}
+.menu-btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border:1.5px solid currentColor;border-radius:999px;background:transparent;font-size:14px;font-weight:700;cursor:pointer}
+.menu-btn i{font-style:normal;display:inline-block;transition:transform .3s}
+.menu-btn[aria-expanded="true"] i{transform:rotate(45deg)}
+
+/* full-screen menu */
+.menu{position:fixed;inset:0;z-index:55;background:#000;color:#fff;display:none;flex-direction:column;justify-content:safe flex-end;padding:90px var(--pad) 32px;overflow-y:auto}
+.menu.open{display:flex}
+.menu ul{list-style:none}
+.menu li{overflow:hidden;border-top:1px solid var(--line-d)}
+.menu ul a{display:flex;justify-content:space-between;align-items:baseline;gap:20px;font-size:clamp(32px,min(5.4vw,8.4vh),84px);font-weight:800;letter-spacing:-.05em;line-height:1.14;text-decoration:none;padding:4px 0}
+.menu ul a span{font-size:14px;font-weight:500;letter-spacing:0;opacity:.7}
+.menu ul a:hover{color:var(--blue)}
+.menu-foot a{font-weight:700;text-underline-offset:4px}
+.menu-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding-top:76px;padding-bottom:26px}
+.hero-meta{display:flex;justify-content:space-between;gap:24px}
+.hero-meta p{max-width:22em}
+.mark{position:relative;display:flex;flex-wrap:nowrap;align-items:flex-end;margin:2vh 0 0 -.06em;color:var(--blue);font-family:var(--disp);font-style:italic;font-weight:900;font-stretch:62%;text-transform:uppercase;line-height:.8;letter-spacing:-.012em;font-size:23vw;transform-origin:50% 0}
+.slab{position:relative;display:block;flex:none}
+.slice{display:block;white-space:nowrap;padding:.05em .09em .03em 0;clip-path:inset(calc(var(--i) * 100% / 7 - 1px) 0 calc((6 - var(--i)) * 100% / 7 - 1px) 0)}
+.slice+.slice{position:absolute;left:0;top:0}
+.slice:first-child{clip-path:inset(-10% 0 calc(6 * 100% / 7) 0)}
+.slice:last-child{clip-path:inset(calc(6 * 100% / 7) 0 -10% 0)}
+.sticker{position:absolute;right:7vw;top:calc(50% - 40px);width:clamp(108px,11vw,168px);aspect-ratio:1;border-radius:50%;background:var(--orange);color:#000;display:grid;place-items:center;transform:rotate(-14deg);z-index:2;text-decoration:none;box-shadow:0 0 0 0 transparent}
+.sticker svg{position:absolute;inset:0;width:100%;height:100%}
+.sticker text{font-family:var(--kr);font-size:10.6px;font-weight:800;letter-spacing:.12em;fill:#000}
+.sticker b{font-family:var(--disp);font-style:italic;font-weight:900;font-stretch:62%;font-size:clamp(26px,2.6vw,40px);line-height:.9;text-align:center}
+.sticker b small{display:block;font-family:var(--kr);font-style:normal;font-size:12px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
+.hero-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:28px}
+.hero h1{font-size:clamp(30px,3.9vw,62px);line-height:1.12;font-weight:800;letter-spacing:-.045em;max-width:14em}
+.hero-sub{margin-top:14px;max-width:34em;color:#1d2026}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.scroll-pill{margin-bottom:64px;display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;border:1.5px solid #000;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
+.scroll-pill i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+
+/* scroll-driven fact band */
+.band{overflow:hidden;border-block:1px solid #000;background:#000;color:#fff;padding:18px 0}
+.band-track{display:flex;gap:56px;white-space:nowrap;width:max-content;font-size:clamp(20px,2.2vw,32px);font-weight:700;letter-spacing:-.03em}
+.band-track span{display:inline-flex;align-items:baseline;gap:14px}
+.band-track em{font-style:normal;font-family:var(--disp);font-weight:900;font-stretch:62%;font-size:1.5em;color:var(--orange)}
+.band-track small{font-size:14px;font-weight:500;opacity:.7}
+
+/* PROBLEM (black) */
+.prob{padding-top:clamp(90px,12vw,180px)}
+.prob-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end;padding-bottom:clamp(40px,6vw,90px)}
+.prob-intro .lead{color:#d9dbe0}
+.prob-pin{overflow:hidden}
+.prob-track{display:flex;flex-direction:column}
+.prob-panel{position:relative;padding:clamp(28px,4vw,56px) var(--pad);border-top:1px solid var(--line-d)}
+.prob-fig{display:flex;align-items:flex-end;gap:.06em;line-height:.8}
+.prob-num{font-family:var(--disp);font-weight:900;font-stretch:62%;font-size:clamp(150px,38vw,560px);letter-spacing:-.02em;transform-origin:50% 100%}
+.prob-unit{font-size:clamp(36px,6vw,96px);font-weight:800;letter-spacing:-.04em;padding-bottom:.12em}
+.prob-panel p{font-size:clamp(18px,1.6vw,22px);max-width:26em;margin-top:22px;letter-spacing:-.02em}
+.src{display:inline-block;margin-top:12px;font-size:13px;opacity:.7}
+.zero .prob-num{position:relative}
+.zero .prob-num::after{content:"";position:absolute;left:-6%;right:-6%;top:48%;height:.07em;background:var(--orange);transform:rotate(-14deg)}
+.issues{list-style:none;display:grid;gap:28px;max-width:44em}
+.issues li{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;border-top:1px solid var(--line-d);padding-top:22px}
+.issues b{font-size:clamp(22px,2.4vw,34px);font-weight:800;letter-spacing:-.04em;line-height:1.2;min-width:7.2em}
+.issues span{color:#d9dbe0}
+.issues-h{font-size:clamp(28px,3.2vw,48px);font-weight:800;letter-spacing:-.045em;line-height:1.15;margin-bottom:30px}
+
+/* FLOW (choreographed words) */
+.flow{position:relative;padding-top:clamp(90px,12vw,180px)}
+.flow-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end}
+.flow-list{list-style:none;margin-top:clamp(40px,6vw,80px);padding-bottom:clamp(60px,8vw,120px)}
+.flow-list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:end;border-top:1px solid #000;padding:20px 0 26px}
+.flow-list .fw{font-size:clamp(84px,17vw,260px);font-weight:900;letter-spacing:-.06em;line-height:.9}
+.flow-list .fw sup{font-family:var(--disp);font-size:.16em;font-weight:800;font-stretch:80%;vertical-align:top;margin-right:.3em;letter-spacing:0;color:var(--blue)}
+.flow-list .role{display:block;font-weight:800;font-size:19px;letter-spacing:-.02em}
+.flow-stage{display:none}
+html.km .flow-list{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%)}
+html.km .flow-stage{display:block;position:relative;height:100vh;height:100svh;overflow:hidden}
+.fs-words{position:absolute;inset:0;display:grid;place-items:center}
+.fs-word{position:absolute;inset:0;display:grid;place-items:center}
+.fs-word span{position:absolute;font-size:min(34vw,64vh);font-weight:900;letter-spacing:-.07em;line-height:1;white-space:nowrap;transform-origin:50% 50%;will-change:transform}
+.fs-word .g1{color:transparent;-webkit-text-stroke:2px var(--blue)}
+.fs-word .g2{color:transparent;-webkit-text-stroke:2px var(--orange)}
+.fs-meta{position:absolute;left:var(--pad);bottom:28px;max-width:25em;z-index:2}
+.fs-count{font-family:var(--disp);font-weight:800;font-stretch:80%;font-size:15px;letter-spacing:.02em}
+.fs-role{display:block;font-weight:800;font-size:19px;margin-top:6px}
+.fs-desc{margin-top:4px;color:#1d2026}
+.fs-bar{position:absolute;right:var(--pad);bottom:36px;width:min(28vw,280px);height:3px;background:var(--line)}
+.fs-bar i{position:absolute;inset:0;background:#000;transform-origin:0 50%;transform:scaleX(0)}
+.fs-head{position:absolute;right:var(--pad);top:84px;text-align:right}
+
+/* OFFER */
+.offer{padding-block:clamp(90px,12vw,180px)}
+.offer-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(40px,6vw,80px)}
+.offer-head p{color:#1d2026}
+.rows{list-style:none}
+.rows li{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(18px,4vw,64px);border-top:1px solid #000;padding:clamp(18px,2.4vw,32px) 0;align-items:start}
+.rows li:last-child{border-bottom:1px solid #000}
+.rw{font-size:clamp(46px,8.4vw,140px);line-height:1;font-weight:800;letter-spacing:-.06em;transition:color .25s}
+.rows li:hover .rw{color:var(--blue)}
+.rd p{font-size:clamp(17px,1.35vw,20px);letter-spacing:-.015em}
+.rd ul{margin-top:12px;padding-left:1.1em;color:#1d2026}
+.rd li{display:list-item;border:0;padding:2px 0;grid-template-columns:none}
+
+/* REFUSE (black, struck) */
+.refuse{padding-block:clamp(90px,12vw,180px)}
+.refuse-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(40px,6vw,80px)}
+.refuse-head p{color:#d9dbe0}
+.refs{list-style:none}
+.refs li{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(18px,4vw,64px);border-top:1px solid var(--line-d);padding:clamp(18px,2.4vw,30px) 0;align-items:center}
+.refs li:last-child{border-bottom:1px solid var(--line-d)}
+.ref-w{position:relative;justify-self:start;font-size:clamp(44px,7.6vw,128px);line-height:1.02;font-weight:800;letter-spacing:-.06em;color:#fff}
+.ref-w i{position:absolute;left:-.04em;right:-.04em;top:52%;height:.1em;background:var(--orange);transform-origin:0 50%}
+.refs p{color:#d9dbe0;font-size:clamp(16px,1.3vw,19px)}
+
+/* PILOT (blue) */
+.pilot{padding-block:clamp(90px,12vw,180px)}
+.pilot-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end}
+.pilot-head p{color:#eef0ff}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(40px,6vw,90px);border-top:1.5px solid #fff}
+.steps li{padding:18px clamp(12px,1.6vw,26px) 10px 0;border-right:1px solid rgba(255,255,255,.35);padding-left:clamp(12px,1.6vw,26px)}
+.steps li:first-child{padding-left:0}
+.steps li:last-child{border-right:0}
+.sn{display:block;font-family:var(--disp);font-style:italic;font-weight:900;font-stretch:62%;font-size:clamp(110px,14vw,240px);line-height:.82;letter-spacing:-.02em;transform-origin:50% 100%}
+.steps b{display:block;font-size:clamp(20px,1.7vw,26px);letter-spacing:-.03em;margin-top:16px}
+.steps p{margin-top:6px;color:#eef0ff;font-size:16px}
+.cond{margin-top:clamp(50px,7vw,100px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,80px)}
+.cond h3{font-size:clamp(24px,2.4vw,36px);letter-spacing:-.04em;line-height:1.2}
+.cond table{width:100%;border-collapse:collapse;font-size:17px}
+.cond th,.cond td{text-align:left;padding:14px 12px 14px 0;border-bottom:1px solid rgba(255,255,255,.4);vertical-align:top}
+.cond thead th{font-size:13px;font-weight:600;opacity:.85}
+.cond tbody th{font-weight:800;white-space:nowrap;width:8em}
+.cond .note{margin-top:18px;font-size:15px;color:#eef0ff}
+
+/* FAQ */
+.faq{padding-block:clamp(90px,12vw,180px)}
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,80px)}
+.faq details{border-top:1px solid #000}
+.faq details:last-child{border-bottom:1px solid #000}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px 0;font-size:clamp(20px,1.9vw,28px);font-weight:800;letter-spacing:-.035em;line-height:1.3}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--disp);font-weight:500;font-size:1.5em;line-height:1;transition:transform .3s;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 26px;max-width:40em;color:#1d2026}
+
+/* CONTACT */
+.contact{padding-block:clamp(90px,12vw,170px);border-top:1px solid #000}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,100px)}
+.contact .h2{font-size:clamp(40px,6.6vw,110px)}
+.contact-copy p{margin-top:22px;color:#1d2026}
+.form{display:grid;gap:22px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.field label{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
+.opt{font-weight:500;color:var(--mute);margin-left:6px}
+.field input,.field select,.field textarea{width:100%;min-height:50px;padding:10px 0;border:0;border-bottom:2px solid #000;background:transparent;border-radius:0;font-size:17px}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-bottom-color:var(--blue)}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{box-shadow:0 2px 0 0 var(--blue)}
+.err{display:none;color:#C4161C;font-size:14px;margin-top:6px;font-weight:600}
+.field.bad .err{display:block}
+.field.bad input,.field.bad select{border-bottom-color:#C4161C}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#1d2026;cursor:pointer}
+.consent input{width:20px;height:20px;margin-top:4px;accent-color:#000;flex:none}
+.consent.bad{color:#C4161C}
+.form-status{font-weight:700;min-height:1.5em}
+
+/* FOOTER with cropped giant wordmark */
+.foot{padding-top:clamp(60px,8vw,110px);overflow:hidden}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:30px;padding-bottom:40px}
+.foot h3{font-size:13px;font-weight:600;opacity:.7;margin-bottom:10px}
+.foot ul{list-style:none;display:grid;gap:4px}
+.foot a{text-decoration:none}
+.foot a:hover{text-decoration:underline;text-underline-offset:4px}
+.foot-tag{font-size:clamp(22px,2.2vw,32px);font-weight:800;letter-spacing:-.04em;line-height:1.25;max-width:13em}
+.foot-note{font-size:13px;line-height:1.6;opacity:.72;max-width:70em;padding-bottom:28px}
+.foot-mark{color:#fff;font-size:23vw;margin:0 0 0 -.05em;height:.66em;overflow:hidden}
+.foot-mark .slab{line-height:.8}
+
+/* motion toggle (WCAG 2.2.2) */
+.motion-tg{position:fixed;right:var(--pad);bottom:18px;z-index:70;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #fff;background:#000;color:#fff;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 0 0 1.5px #000}
+.motion-tg i{width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.motion-tg[aria-pressed="true"] i{background:#7d8088}
+
+/* responsive */
+@media (max-width:899px){
+  .prob-intro,.flow-head,.offer-head,.refuse-head,.pilot-head,.cond,.faq-grid,.contact-grid{grid-template-columns:1fr}
+  .rows li,.refs li,.flow-list li{grid-template-columns:1fr;gap:10px}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps li{padding-left:0!important;border-right:0;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:22px}
+  .steps li:nth-child(odd){padding-right:16px}
+  .top-link{display:none}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .hero{padding-top:66px;padding-bottom:72px}
+  .hero-meta p+p{display:none}
+  .mark{flex-direction:column;align-items:flex-start;font-size:46vw;margin-top:0}
+  .mark .slab+.slab{margin-left:12vw}
+  .sticker{top:auto;bottom:calc(100% - 52vh);right:5vw}
+  .hero-foot{grid-template-columns:1fr}
+  .scroll-pill{display:none}
+  .ctas .btn{flex:1 1 auto}
+  .form .row{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-grid>div:first-child{grid-column:1/-1}
+  .issues li{grid-template-columns:1fr;gap:6px}
+  .cond tbody th{width:auto}
+  .fs-bar{display:none}
+  .fs-meta{right:var(--pad);bottom:76px}
+  .motion-tg{bottom:12px;height:38px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 이동</a>
+
+<header class="top">
+  <a class="logo" href="#top" aria-label="페어마크 처음으로">Fairmark</a>
+  <div class="top-r">
+    <a class="top-link" href="investor.html">투자자 정보</a>
+    <a class="top-link" href="#contact">파일럿 신청</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu"><span id="menuLabel">메뉴</span> <i aria-hidden="true">+</i></button>
+  </div>
+</header>
+
+<nav class="menu" id="menu" aria-label="전체 메뉴">
+  <ul>
+    <li><a href="#why">왜 지금 <span>현황</span></a></li>
+    <li><a href="#flow">판정 흐름 <span>네 단계</span></a></li>
+    <li><a href="#offer">제공하는 것 <span>표준 패키지</span></a></li>
+    <li><a href="#refuse">하지 않는 일 <span>원칙</span></a></li>
+    <li><a href="#pilot">파일럿 <span>두 회차</span></a></li>
+    <li><a href="#faq">자주 묻는 질문</a></li>
+    <li><a href="investor.html">투자자 정보 <span>사업계획</span></a></li>
+  </ul>
+  <div class="menu-foot meta"><span>시험장 무결성 운영 표준</span><a href="#contact">파일럿 상담 신청</a></div>
+</nav>
+
+<main id="main">
+<section class="hero wrap" id="top" aria-labelledby="heroTitle">
+  <div class="hero-meta meta">
+    <p>자격검정기관과 시험 운영사를 위한<br>시험장 무결성 운영 표준</p>
+    <p>발견 확인 판정 보존<br>네 단계로 남기는 시험 감독</p>
+  </div>
+
+  <div class="mark fit" id="heroMark" aria-hidden="true">
+    <span class="slab" data-word="FAIR"></span><span class="slab" data-word="MARK"></span>
+  </div>
+
+  <a class="sticker" id="sticker" href="#pilot" aria-label="2027년 상반기 파일럿 기관 모집, 파일럿 안내로 이동">
+    <svg viewBox="0 0 160 160" aria-hidden="true"><defs><path id="circ" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#circ">파일럿 기관 모집 ✦ 2027 상반기 ✦ 두 회차 실증 ✦</textPath></text></svg>
+    <b aria-hidden="true">PILOT<small>모집 중</small></b>
+  </a>
+
+  <div class="hero-foot">
+    <div>
+      <h1 id="heroTitle">시험장에서 본 것을,<br>판정할 수 있는 기록으로.</h1>
+      <p class="hero-sub">스마트안경과 초소형 카메라가 시험장에 들어온 뒤, 감독관 혼자 판단하는 방식은 버티기 어렵습니다. 페어마크는 확인 기준, 2인 확인 절차, 판정 기록을 한 번에 갖춰 드립니다.</p>
+      <div class="ctas"><a class="btn btn-ink" href="#contact">파일럿 상담 신청</a><a class="btn btn-line" href="#flow">판정 흐름 보기</a></div>
+    </div>
+    <a class="scroll-pill" href="#why"><i aria-hidden="true"></i>스크롤</a>
+  </div>
+</section>
+
+<div class="band" aria-label="2026년 시험 부정행위 현황">
+  <div class="band-track" id="bandTrack">
+    <span><em>111</em>건 수능 전자기기 부정행위 <small>2027학년도</small></span>
+    <span><em>5</em>건 국가자격시험 스마트안경 적발 <small>2026년 1~10월</small></span>
+    <span><em>269</em>개 공인중개사 시험장 추가 점검 <small>10월 31일</small></span>
+    <span><em>46</em>개 대학 대학별고사 대응 점검 <small>11월 20일</small></span>
+    <span><em>229</em>만 명 국가기술자격 응시 <small>2025년</small></span>
+    <span aria-hidden="true"><em>111</em>건 수능 전자기기 부정행위 <small>2027학년도</small></span>
+    <span aria-hidden="true"><em>5</em>건 국가자격시험 스마트안경 적발 <small>2026년 1~10월</small></span>
+    <span aria-hidden="true"><em>269</em>개 공인중개사 시험장 추가 점검 <small>10월 31일</small></span>
+  </div>
+</div>
+
+<section class="prob dark" id="why" aria-labelledby="whyTitle">
+  <div class="wrap prob-intro">
+    <h2 class="h2" id="whyTitle">잡기 어렵고,<br>놓치면 되짚을<br>기록이 없습니다</h2>
+    <p class="lead" data-words>2026년 하반기 국가자격시험, 수능, 대학 논술에서 AI 기기 부정행위가 이어졌습니다. 정부 대책은 국가시험부터 시작했고, 협회와 민간 시험은 각자 대응해야 합니다.</p>
+  </div>
+  <div class="prob-pin" id="probPin">
+    <div class="prob-track" id="probTrack">
+      <article class="prob-panel">
+        <div class="prob-fig"><span class="prob-num">111</span><span class="prob-unit">건</span></div>
+        <p>2027학년도 수능 전자기기 관련 부정행위. 이 중 시험 중 실제 사용이 확인된 것은 5건입니다.</p>
+        <span class="src">교육부 발표 보도</span>
+      </article>
+      <article class="prob-panel">
+        <div class="prob-fig"><span class="prob-num">5</span><span class="prob-unit">건</span></div>
+        <p>2026년 산업인력공단 시험의 스마트안경 적발. 모두 감독관이 빛이나 소리를 보고 잡았습니다.</p>
+        <span class="src">국정감사 보도</span>
+      </article>
+      <article class="prob-panel zero">
+        <div class="prob-fig"><span class="prob-num">0</span><span class="prob-unit">대</span></div>
+        <p>시험장에 쓸 수 있는 전파 차단 장비. 전파법상 허용되지 않아 정부도 검토를 접었습니다.</p>
+        <span class="src">교육부 발표 보도</span>
+      </article>
+      <article class="prob-panel">
+        <h3 class="issues-h">현장에서 반복되는<br>세 가지 빈칸</h3>
+        <ul class="issues">
+          <li><b>확인 기준이 제각각</b><span>어떤 안경을 다시 볼지, 재검사를 누가 어디서 할지가 기관마다 달라 감독관이 혼자 판단합니다.</span></li>
+          <li><b>판정 근거가 안 남음</b><span>의심했다가 해소한 일은 기록되지 않고, 이의신청이 오면 경위를 다시 맞춰야 합니다.</span></li>
+          <li><b>사례가 공유되지 않음</b><span>한 기관에서 적발된 기기와 상황이 다른 기관 감독관에게 전해지지 않습니다.</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="flow" id="flow" aria-labelledby="flowTitle">
+  <div class="wrap flow-head">
+    <h2 class="h2" id="flowTitle">의심은 선별하고,<br>판정은 사람이 합니다</h2>
+    <p class="lead">모든 확인은 네 단계를 거칩니다. 발견한 사람과 판정하는 사람을 나눠, 한 사람의 착각이 응시자의 결과가 되지 않게 합니다.</p>
+  </div>
+  <ol class="wrap flow-list">
+    <li><span class="fw"><sup>1</sup>발견</span><span><span class="role">시험실 감독관</span>입실 확인이나 순회 중 다시 볼 필요가 있는 상황을 기록 앱에 남깁니다.</span></li>
+    <li><span class="fw"><sup>2</sup>확인</span><span><span class="role">두 번째 감독관</span>응시자 협조를 받아 기관 절차대로 실물을 확인합니다.</span></li>
+    <li><span class="fw"><sup>3</sup>판정</span><span><span class="role">시험본부</span>확인 기록을 보고 계속 진행, 조치, 부정행위 처리 중 하나를 결정합니다.</span></li>
+    <li><span class="fw"><sup>4</sup>보존</span><span><span class="role">기록 보관</span>경위와 결과를 이의신청 기간 동안 보관하고, 기간이 끝나면 기관 규정대로 파기합니다.</span></li>
+  </ol>
+  <div class="flow-stage" id="flowStage" aria-hidden="true">
+    <div class="fs-words">
+      <div class="fs-word"><span class="g2">발견</span><span class="g1">발견</span><span class="w">발견</span></div>
+      <div class="fs-word"><span class="g2">확인</span><span class="g1">확인</span><span class="w">확인</span></div>
+      <div class="fs-word"><span class="g2">판정</span><span class="g1">판정</span><span class="w">판정</span></div>
+      <div class="fs-word"><span class="g2">보존</span><span class="g1">보존</span><span class="w">보존</span></div>
+    </div>
+    <p class="fs-head meta">판정 흐름</p>
+    <div class="fs-meta"><span class="fs-count" id="fsCount">1 / 4</span><span class="fs-role" id="fsRole">시험실 감독관</span><p class="fs-desc" id="fsDesc">입실 확인이나 순회 중 다시 볼 필요가 있는 상황을 기록 앱에 남깁니다.</p></div>
+    <div class="fs-bar"><i id="fsBar"></i></div>
+  </div>
+</section>
+
+<section class="offer wrap" id="offer" aria-labelledby="offerTitle">
+  <div class="offer-head">
+    <h2 class="h2" id="offerTitle">인력을 보내는 대신,<br>기준을 갖춰 드립니다</h2>
+    <p class="lead">기관 감독관이 같은 기준으로 일할 수 있도록 절차, 교육, 기록 도구, 사례 데이터를 함께 제공합니다. 대규모 시험은 협력 시험 운영사와 함께 운영합니다.</p>
+  </div>
+  <ul class="rows">
+    <li><h3 class="rw">운영 절차</h3><div class="rd"><p>기관 규정에 맞춘 입실 확인, 재검사, 재입실 절차를 문서로 만듭니다.</p><ul><li>허용 물품과 승인된 보조기기 기준</li><li>재검사 장소·담당자, 응시자 동의 안내 문구</li><li>입실 마감과 지연 허용 기준</li></ul></div></li>
+    <li><h3 class="rw">감독관 교육</h3><div class="rd"><p>회차 전 40분 교육으로 감독관이 같은 기준으로 확인하고 기록합니다.</p><ul><li>기기 외형과 작동 징후 식별</li><li>응시자 응대와 분쟁 예방 화법</li></ul></div></li>
+    <li><h3 class="rw">판정 기록 앱</h3><div class="rd"><p>태블릿에서 발견, 확인, 판정, 보존을 단계별로 남깁니다. 네트워크가 없는 시험장에서도 기록하고 나중에 동기화합니다.</p><ul><li>누가 언제 무엇을 확인했는지 자동 기록</li><li>해소된 의심도 기록해 응시자 보호 근거로 사용</li></ul></div></li>
+    <li><h3 class="rw">사례 공유</h3><div class="rd"><p>참여 기관의 확인 사례를 익명화해 모으고, 시험이 끝나면 한 장짜리 회차 보고서를 드립니다.</p><ul><li>새로 등장한 기기, 자주 생긴 오인 사례</li><li>확인 건수, 재검사율, 입실 대기시간, 판정 결과</li></ul></div></li>
+  </ul>
+</section>
+
+<section class="refuse dark" id="refuse" aria-labelledby="refTitle">
+  <div class="wrap">
+    <div class="refuse-head">
+      <h2 class="h2" id="refTitle">페어마크가<br>하지 않는 일</h2>
+      <p class="lead">공정한 시험을 지키는 방법이 응시자의 권리를 해치면 안 됩니다. 아래 원칙은 계약서에도 그대로 적습니다.</p>
+    </div>
+    <ul class="refs">
+      <li><span class="ref-w">전파 차단<i aria-hidden="true"></i></span><p>시험장 재밍은 국내 전파법상 허용되지 않습니다. 차단 장비를 쓰거나 팔지 않습니다.</p></li>
+      <li><span class="ref-w">AI 단독 판정<i aria-hidden="true"></i></span><p>기술은 다시 볼 대상을 고르는 데까지만 씁니다. 판정은 언제나 시험기관이 합니다.</p></li>
+      <li><span class="ref-w">생체정보 수집<i aria-hidden="true"></i></span><p>얼굴, 손바닥 같은 생체정보를 모으지 않습니다. 판정에 필요한 최소 정보만 남깁니다.</p></li>
+      <li><span class="ref-w">근거 없는 탐지율<i aria-hidden="true"></i></span><p>성과는 기관의 실제 시험에서 측정한 결과로만 보고합니다.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="pilot blue" id="pilot" aria-labelledby="pilotTitle">
+  <div class="wrap">
+    <div class="pilot-head">
+      <h2 class="h2" id="pilotTitle">실제 시험<br>두 회차로 확인하세요</h2>
+      <p class="lead">도입을 결정하기 전에, 기관의 실제 시험 두 회차에서 페어마크 표준이 지금 방식보다 나은지 함께 측정합니다. 첫 참여 기관에는 실증 조건을 별도로 제안합니다.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="sn" aria-hidden="true">1</span><b>현황 진단</b><p>감독 인력, 입실 동선, 금지 물품 규정, 이의신청 처리 방식을 확인합니다.</p></li>
+      <li><span class="sn" aria-hidden="true">2</span><b>모의 비교</b><p>성적에 영향이 없는 모의시험에서 세 가지 운영 조건을 비교합니다.</p></li>
+      <li><span class="sn" aria-hidden="true">3</span><b>첫 번째 실제 회차</b><p>합의한 표준으로 시험을 운영하고 모든 확인 과정을 기록합니다.</p></li>
+      <li><span class="sn" aria-hidden="true">4</span><b>두 번째 회차와 보고</b><p>개선점을 반영해 다시 운영하고, 두 회차 결과를 보고서로 드립니다.</p></li>
+    </ol>
+    <div class="cond">
+      <h3>모의시험에서<br>비교하는 세 조건</h3>
+      <div>
+        <table>
+          <thead><tr><th scope="col">조건</th><th scope="col">내용</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">현행</th><td>기관이 지금 쓰는 육안 확인</td></tr>
+            <tr><th scope="row">표준</th><td>페어마크 절차, 교육, 기록 앱</td></tr>
+            <tr><th scope="row">표준과 장비</th><td>표준에 기성 탐지 장비 추가</td></tr>
+          </tbody>
+        </table>
+        <p class="note">측정 지표: 사전에 심어둔 확인 대상의 발견률, 정상 응시자 1,000명당 재검사 건수, 입실 대기시간, 회차당 인력과 비용. 실제 부정 시도자 기준의 탐지율은 측정할 수 없으므로 주장하지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq wrap" id="faq" aria-labelledby="faqTitle">
+  <div class="faq-grid">
+    <h2 class="h2" id="faqTitle">자주 묻는<br>질문</h2>
+    <div>
+      <details><summary>감독 인력을 보내 주나요?</summary><p>기본은 기관 감독관이 운영하고, 페어마크는 절차·교육·기록 도구를 제공합니다. 파일럿 기간에는 현장 책임자가 함께 확인하고, 대규모 회차는 협력 시험 운영사와 진행합니다.</p></details>
+      <details><summary>탐지 장비를 꼭 사야 하나요?</summary><p>아니요. 표준 절차만으로 시작할 수 있습니다. 장비가 기관의 현장에서 추가 효과를 내는지는 파일럿에서 따로 측정한 뒤 결정합니다.</p></details>
+      <details><summary>응시자를 잘못 의심하면 어떻게 되나요?</summary><p>발견과 판정을 분리하고, 두 명 이상의 확인을 거쳐 시험기관이 판정하도록 설계했습니다. 해소된 의심도 기록으로 남아 응시자가 공정하게 다뤄졌다는 근거가 됩니다.</p></details>
+      <details><summary>응시자 개인정보는 어떻게 다루나요?</summary><p>생체정보는 수집하지 않습니다. 수험번호, 시각, 확인 내용처럼 판정에 필요한 정보만 남기고, 기관과 개인정보 처리 위탁 계약을 맺어 보관 기간과 파기 방법을 계약 전에 정합니다.</p></details>
+      <details><summary>비용은 어떻게 정해지나요?</summary><p>도입 설정비와 연간 이용료로 구성되며, 연간 응시자 규모에 따라 달라집니다. 파일럿 범위와 비용은 기관의 시험 일정과 규모를 확인한 뒤 제안서로 드립니다.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contactTitle">
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
+      <h2 class="h2" id="contactTitle">다음 회차부터<br>기준을<br>갖추세요</h2>
+      <p class="lead">시험 일정과 규모를 알려 주시면 두 회차 파일럿의 범위와 비용을 제안서로 보내 드립니다. 영업일 기준 3일 안에 회신합니다.</p>
+    </div>
+    <form class="form" id="form" novalidate>
+      <div class="row">
+        <div class="field"><label for="f-org">기관명</label><input id="f-org" name="org" autocomplete="organization" required><p class="err">기관명을 입력해 주세요.</p></div>
+        <div class="field"><label for="f-name">담당자 이름</label><input id="f-name" name="name" autocomplete="name" required><p class="err">담당자 이름을 입력해 주세요.</p></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="f-mail">업무 이메일</label><input id="f-mail" name="email" type="email" autocomplete="email" inputmode="email" required><p class="err">이메일 형식을 확인해 주세요.</p></div>
+        <div class="field"><label for="f-tel">연락처<span class="opt">선택</span></label><input id="f-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="f-type">시험 종류</label><input id="f-type" name="type" placeholder="예: 자격시험, 채용 필기, 논술" required><p class="err">시험 종류를 입력해 주세요.</p></div>
+        <div class="field"><label for="f-size">연간 응시자 규모</label><select id="f-size" name="size" required><option value="">선택해 주세요</option><option>1만 명 미만</option><option>1만~5만 명</option><option>5만 명 이상</option></select><p class="err">규모를 선택해 주세요.</p></div>
+      </div>
+      <div class="field"><label for="f-date">다음 두 회차 일정<span class="opt">선택</span></label><input id="f-date" name="date" placeholder="예: 2027년 2월 20일, 4월 17일"></div>
+      <div class="field"><label for="f-msg">요청 사항<span class="opt">선택</span></label><textarea id="f-msg" name="msg"></textarea></div>
+      <label class="consent" id="consent"><input type="checkbox" id="f-ok" required> <span>상담을 위해 기관명, 담당자 이름, 연락처를 수집하고 상담 종료 후 1년간 보관하는 데 동의합니다.</span></label>
+      <div><button class="btn btn-ink" type="submit">파일럿 상담 신청</button></div>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><p class="foot-tag">시험장에서 본 것을, 판정할 수 있는 기록으로.</p></div>
+      <div><h3>서비스</h3><ul><li><a href="#flow">판정 흐름</a></li><li><a href="#offer">제공하는 것</a></li><li><a href="#pilot">파일럿</a></li><li><a href="investor.html">투자자 정보</a></li></ul></div>
+      <div><h3>문의</h3><ul><li><a id="mailLink" href="mailto:contact@example.com">contact@example.com</a></li><li>사업자 정보: 법인 설립 후 기재</li></ul></div>
+    </div>
+    <p class="foot-note">페어마크는 사업 준비 단계의 가칭이며 상표 확인 전입니다. 현황 수치는 2026년 11월 21일 기준 정부 발표와 언론 보도를 따랐습니다. 서비스의 법적 허용 범위는 출시 전 법률 검토로 확정합니다. 이 사이트는 기기의 동작 줄이기 설정을 따르며, 오른쪽 아래 버튼으로 움직임을 언제든 멈출 수 있습니다.</p>
+  </div>
+  <div class="mark foot-mark fit" id="footMark" aria-hidden="true"><span class="slab" data-word="FAIRMARK"></span></div>
+</footer>
+
+<button class="motion-tg" id="motionToggle" type="button" aria-pressed="false"><i aria-hidden="true"></i><span id="motionLabel">움직임 멈추기</span></button>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var MAIL = "contact@example.com";
+  var root = document.documentElement;
+  var $ = function(s,c){ return (c||document).querySelector(s); };
+  var $$ = function(s,c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+  var G = window.gsap, ST = window.ScrollTrigger;
+  var hasG = !!(G && ST);
+  if(hasG) G.registerPlugin(ST);
+
+  /* 1. build sliced slabs: 7 identical strips per word (Mat Voyce-style strip reveal) */
+  var SL = 7;
+  $$(".slab").forEach(function(slab){
+    var w = slab.getAttribute("data-word"), h = "";
+    for(var i=0;i<SL;i++) h += '<span class="slice" style="--i:'+i+'">'+w+'</span>';
+    slab.innerHTML = h;
+  });
+
+  /* 2. fit giant type to the viewport width (type scaled beyond/at viewport edge) */
+  function fit(){
+    var vw = document.documentElement.clientWidth;
+    var hero = $("#heroMark"), mobile = window.matchMedia("(max-width:640px)").matches;
+    [hero, $("#footMark")].forEach(function(m){
+      if(!m) return;
+      m.style.fontSize = "100px";
+      var slabs = $$(".slab", m), widths = slabs.map(function(s){ return s.firstElementChild.getBoundingClientRect().width; });
+      var total;
+      if(m === hero && mobile){ total = Math.max.apply(null, widths); m.style.fontSize = (100 * vw * 0.86 / total) + "px"; }
+      else { total = widths.reduce(function(a,b){ return a+b; }, 0); m.style.fontSize = (100 * vw * (m===hero?1.03:1.0) / total) + "px"; }
+    });
+  }
+
+  /* split text into word spans for scroll fill (keeps real text) */
+  $$("[data-words]").forEach(function(el){
+    var parts = el.textContent.trim().split(/\s+/);
+    el.innerHTML = parts.map(function(p){ return '<span class="wd">'+p+'</span>'; }).join(" ");
+  });
+
+  var flowData = [
+    ["시험실 감독관","입실 확인이나 순회 중 다시 볼 필요가 있는 상황을 기록 앱에 남깁니다."],
+    ["두 번째 감독관","응시자 협조를 받아 기관 절차대로 실물을 확인합니다."],
+    ["시험본부","확인 기록을 보고 계속 진행, 조치, 부정행위 처리 중 하나를 결정합니다."],
+    ["기록 보관","경위와 결과를 이의신청 기간 동안 보관하고, 기간이 끝나면 기관 규정대로 파기합니다."]
+  ];
+
+  var ctx = null, introDone = false;
+
+  function build(){
+    var wide = window.matchMedia("(min-width:900px)").matches;
+    var vh = function(){ return window.innerHeight; };
+    ctx = G.context(function(){
+
+      /* HERO — one strong opening move: strips slide in from alternating sides and lock into the word */
+      var slices = $$("#heroMark .slice");
+      if(!introDone){
+        introDone = true;
+        G.from(slices, { xPercent: function(i){ var r = i % SL; return (r%2 ? 1 : -1) * (22 + r*7); }, duration: 1.5, ease: "expo.out", stagger: { each: 0.045 } });
+        G.from("#heroMark .slab", { scaleY: 0.4, transformOrigin: "50% 0%", duration: 1.2, ease: "expo.out" });
+        G.from(".hero-meta p, .hero-foot h1, .hero-sub, .ctas, .scroll-pill", { y: 24, autoAlpha: 0, duration: 0.9, ease: "power3.out", stagger: 0.07, delay: 0.55 });
+        G.from("#sticker", { scale: 0, rotation: -120, duration: 1.1, ease: "back.out(1.6)", delay: 0.9 });
+      }
+      /* scroll: the word stretches and its strips shear apart */
+      var hs = G.timeline({ scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.5 } });
+      hs.to("#heroMark", { scaleY: 1.45, ease: "none" }, 0)
+        .to(slices, { x: function(i){ return ((i % SL) - 3) * window.innerWidth * 0.018; }, ease: "none" }, 0);
+      G.to("#sticker", { rotation: 346, ease: "none", scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 0.8 } });
+
+      /* fact band moves with scroll, not on its own */
+      G.fromTo("#bandTrack", { xPercent: 0 }, { xPercent: -38, ease: "none", scrollTrigger: { trigger: ".band", start: "top bottom", end: "bottom top", scrub: 0.6 } });
+
+      /* muted text fills in as you read */
+      $$("[data-words]").forEach(function(el){
+        G.fromTo($$(".wd", el), { opacity: 0.18 }, { opacity: 1, stagger: 0.1, ease: "none", scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 55%", scrub: true } });
+      });
+
+      /* PROBLEM — pinned horizontal run of giant numbers on wide screens */
+      var track = $("#probTrack");
+      var nums = $$(".prob-num");
+      if(wide){
+        track.style.flexDirection = "row";
+        $$(".prob-panel", track).forEach(function(p){ p.style.flex = "0 0 auto"; p.style.width = p.classList.contains("zero") || p.querySelector(".issues") ? "" : "64vw"; p.style.borderTop = "0"; p.style.borderLeft = "1px solid rgba(255,255,255,.22)"; p.style.minHeight = "100vh"; p.style.display="flex"; p.style.flexDirection="column"; p.style.justifyContent="center"; });
+        $(".prob-panel.zero").style.width = "64vw";
+        track.lastElementChild.style.width = "min(88vw,1100px)";
+        var dist = function(){ return track.scrollWidth - document.documentElement.clientWidth; };
+        var hz = G.to(track, { x: function(){ return -dist(); }, ease: "none", scrollTrigger: { trigger: "#probPin", pin: true, start: "top top", end: function(){ return "+=" + dist(); }, scrub: 0.8, invalidateOnRefresh: true } });
+        nums.forEach(function(n){
+          G.fromTo(n, { scaleY: 0.08 }, { scaleY: 1, ease: "power2.out", scrollTrigger: { trigger: n, containerAnimation: hz, start: "left 92%", end: "left 45%", scrub: true } });
+        });
+      } else {
+        nums.forEach(function(n){
+          G.fromTo(n, { scaleY: 0.1 }, { scaleY: 1, ease: "power2.out", scrollTrigger: { trigger: n, start: "top 95%", end: "top 55%", scrub: true } });
+        });
+      }
+
+      /* FLOW — choreographed words: travel up through the viewport, stretch at the edges, slow in the middle, outlined ghosts trail behind */
+      var stage = $("#flowStage"), words = $$(".fs-word", stage), last = -1;
+      var role = $("#fsRole"), desc = $("#fsDesc"), cnt = $("#fsCount"), bar = $("#fsBar");
+      var ftl = G.timeline({ scrollTrigger: { trigger: stage, pin: true, start: "top top", end: function(){ return "+=" + vh()*3.4; }, scrub: 0.7, invalidateOnRefresh: true,
+        onUpdate: function(self){
+          var i = Math.min(3, Math.floor(self.progress * 4 + 0.08));
+          bar.style.transform = "scaleX(" + self.progress.toFixed(3) + ")";
+          if(i !== last){ last = i; role.textContent = flowData[i][0]; desc.textContent = flowData[i][1]; cnt.textContent = (i+1) + " / 4"; }
+        } } });
+      words.forEach(function(w, i){
+        $$("span", w).forEach(function(s){
+          var lag = s.classList.contains("g2") ? 0.12 : s.classList.contains("g1") ? 0.06 : 0;
+          var t = i * 1.0 + lag;
+          ftl.fromTo(s, { y: function(){ return vh()*0.95; }, scaleY: 2.4 }, { y: 0, scaleY: 1, duration: 0.42, ease: "power3.out" }, t);
+          if(i < words.length - 1) ftl.to(s, { y: function(){ return -vh()*0.95; }, scaleY: 2.4, duration: 0.42, ease: "power3.in" }, t + 0.62);
+        });
+      });
+      ftl.to({}, { duration: 0.3 });
+
+      /* OFFER — variable weight morph as each row reaches the reading line */
+      $$(".rw").forEach(function(w){
+        G.fromTo(w, { fontWeight: 200 }, { fontWeight: 900, ease: "none", scrollTrigger: { trigger: w, start: "top 88%", end: "top 48%", scrub: true } });
+      });
+
+      /* REFUSE — strike bars drawn by scroll */
+      $$(".ref-w i").forEach(function(b){
+        G.fromTo(b, { scaleX: 0 }, { scaleX: 1, ease: "power2.inOut", scrollTrigger: { trigger: b.parentNode, start: "top 82%", end: "top 52%", scrub: true } });
+      });
+
+      /* PILOT — numerals stretch up once */
+      G.from(".sn", { scaleY: 0.05, duration: 1, ease: "expo.out", stagger: 0.12, scrollTrigger: { trigger: ".steps", start: "top 80%" } });
+
+      /* FOOTER — strips gather into the wordmark at the end of the page */
+      G.fromTo("#footMark .slice", { xPercent: function(i){ return (i%2 ? 1 : -1) * (8 + i*3); } }, { xPercent: 0, ease: "none", scrollTrigger: { trigger: ".foot", start: "top 85%", end: "bottom bottom", scrub: 0.6 } });
+    });
+  }
+
+  function clearInline(){
+    var track = $("#probTrack");
+    track.style.flexDirection = "";
+    $$(".prob-panel", track).forEach(function(p){ ["flex","width","borderTop","borderLeft","minHeight","display","flexDirection","justifyContent"].forEach(function(k){ p.style[k] = ""; }); });
+    $("#fsBar").style.transform = "";
+  }
+
+  /* motion on/off (WCAG 2.2.2 pause control + prefers-reduced-motion) */
+  var btn = $("#motionToggle"), lbl = $("#motionLabel");
+  var mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var stored = null; try { stored = localStorage.getItem("fm-motion"); } catch(e){}
+  var motionOn = stored ? stored === "on" : !mql.matches;
+
+  function apply(){
+    if(ctx){ ctx.revert(); ctx = null; }
+    clearInline();
+    var on = motionOn && hasG;
+    root.classList.toggle("km", on);
+    btn.setAttribute("aria-pressed", String(!motionOn));
+    lbl.textContent = motionOn ? "움직임 멈추기" : "움직임 켜기";
+    if(on){ build(); ST.refresh(); }
+  }
+  btn.addEventListener("click", function(){
+    motionOn = !motionOn;
+    try { localStorage.setItem("fm-motion", motionOn ? "on" : "off"); } catch(e){}
+    introDone = true;
+    apply();
+  });
+  if(mql.addEventListener) mql.addEventListener("change", function(e){ if(stored === null){ motionOn = !e.matches; introDone = true; apply(); } });
+  if(!hasG){ btn.hidden = true; }
+
+  var lastWide = window.matchMedia("(min-width:900px)").matches, rT;
+  window.addEventListener("resize", function(){
+    clearTimeout(rT);
+    rT = setTimeout(function(){
+      fit();
+      var w = window.matchMedia("(min-width:900px)").matches;
+      if(w !== lastWide){ lastWide = w; introDone = true; apply(); }
+      else if(ctx && hasG){ ST.refresh(); }
+    }, 180);
+  });
+
+  fit();
+  apply();
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ fit(); if(ctx && hasG) ST.refresh(); }); }
+
+  /* menu overlay */
+  var mb = $("#menuBtn"), menu = $("#menu"), ml = $("#menuLabel");
+  function setMenu(open){
+    menu.classList.toggle("open", open);
+    mb.setAttribute("aria-expanded", String(open));
+    ml.textContent = open ? "닫기" : "메뉴";
+    document.body.style.overflow = open ? "hidden" : "";
+    if(open){
+      if(motionOn && hasG) G.fromTo($$("#menu ul a"), { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "expo.out", stagger: 0.04 });
+      var f = $("#menu a"); if(f) f.focus();
+    }
+  }
+  mb.addEventListener("click", function(){ setMenu(!menu.classList.contains("open")); });
+  menu.addEventListener("click", function(e){ if(e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", function(e){
+    if(!menu.classList.contains("open")) return;
+    if(e.key === "Escape"){ setMenu(false); mb.focus(); }
+    if(e.key === "Tab"){
+      var items = [mb].concat($$("#menu a")), first = items[0], lastI = items[items.length-1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); lastI.focus(); }
+      else if(!e.shiftKey && document.activeElement === lastI){ e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* contact form → prepared email (replace with a form backend before launch) */
+  $("#mailLink").href = "mailto:" + MAIL; $("#mailLink").textContent = MAIL;
+  var form = $("#form"), status = $("#formStatus");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var ok = true, firstBad = null;
+    $$("[required]", form).forEach(function(inp){
+      var bad = inp.type === "checkbox" ? !inp.checked : (inp.type === "email" ? !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim()) : !inp.value.trim());
+      var wrap = inp.type === "checkbox" ? $("#consent") : inp.closest(".field");
+      wrap.classList.toggle("bad", bad);
+      inp.setAttribute("aria-invalid", String(bad));
+      if(bad){ ok = false; if(!firstBad) firstBad = inp; }
+    });
+    if(!ok){ status.textContent = "표시된 항목을 확인해 주세요."; firstBad.focus(); return; }
+    var d = new FormData(form);
+    var body = ["기관명: "+d.get("org"),"담당자: "+d.get("name"),"이메일: "+d.get("email"),"연락처: "+(d.get("tel")||"-"),"시험 종류: "+d.get("type"),"연간 응시자 규모: "+d.get("size"),"다음 두 회차: "+(d.get("date")||"-"),"요청 사항: "+(d.get("msg")||"-")].join("\n");
+    window.location.href = "mailto:" + MAIL + "?subject=" + encodeURIComponent("[파일럿 상담] " + d.get("org")) + "&body=" + encodeURIComponent(body);
+    status.textContent = "메일 앱에서 신청 내용을 확인하고 보내 주세요. 메일 앱이 열리지 않으면 " + MAIL + " 로 보내 주세요.";
+  });
+  $$("input,select", form).forEach(function(inp){
+    inp.addEventListener("input", function(){ var w = inp.type === "checkbox" ? $("#consent") : inp.closest(".field"); if(w && w.classList.contains("bad")){ w.classList.remove("bad"); inp.setAttribute("aria-invalid","false"); } });
+  });
+})();
+</script>
+</body>
+</html>
