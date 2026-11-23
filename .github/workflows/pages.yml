@@ -23,7 +23,7 @@ jobs:
       - name: Collect site files
         run: |
           mkdir _site
-          cp index.html investor.html 404.html robots.txt fairmark-business-plan-v1.pdf _site/
+          cp index.html investor.html 404.html robots.txt fairmark-business-plan-v1.pdf favicon.svg favicon.ico apple-touch-icon.png icon-192.png icon-512.png og-image.png og-investor.png site.webmanifest _site/
           cp -r vendor _site/
       - uses: actions/upload-pages-artifact@v3
         with:
