@@ -6,7 +6,7 @@
 |---|---|---|
 | `index.html` | 서비스 홈 (키네틱 타이포 디자인) | 노출 |
 | `investor.html` | 투자자 정보, 2인 겸업 창업 계획 v1 | 차단 (`noindex`) |
-| `fairmark-business-plan-v1.pdf` | 사업계획서 31쪽 | 차단 (`X-Robots-Tag`) |
+| `fairmark-business-plan-v1.pdf` | 사업계획서 28쪽 | 차단 (`X-Robots-Tag`) |
 | `404.html` | 없는 주소로 들어왔을 때의 안내 | 차단 |
 | `vendor/` | GSAP 3.15.1 (무료 Standard License) | — |
 | `vercel.json` | Vercel 보안 헤더, 검색 차단, 캐시 설정 | — |
