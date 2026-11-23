@@ -186,6 +186,8 @@ html.km .giant .num{animation:heroIn 1.4s cubic-bezier(.16,1,.3,1) both}
   .kpis{grid-template-columns:1fr}
   .kpi+.kpi{padding-left:0;border-left:0;border-top:1px solid var(--line-d)}
   .top-r .hide-m{display:none}
+  .logo small{display:none}
+  .top-r{gap:14px}
   .foot ol{columns:1}
 }
 @media (max-width:640px){
@@ -207,7 +209,7 @@ html.km .giant .num{animation:heroIn 1.4s cubic-bezier(.16,1,.3,1) both}
 <a class="skip" href="#s1">본문으로 이동</a>
 <header class="top">
   <a class="logo" href="index.html">Fairmark<small>투자자 정보</small></a>
-  <div class="top-r"><a class="hide-m" href="index.html">서비스 홈</a><a class="pill" href="fairmark-business-plan-v1.pdf" download>사업계획서 PDF</a></div>
+  <div class="top-r"><a class="pill" href="index.html" aria-label="서비스 홈으로 이동"><span aria-hidden="true">← </span><span class="hide-m">서비스 </span>홈</a><a class="pill" href="fairmark-business-plan-v1.pdf" download><span class="hide-m">사업계획서 </span>PDF</a></div>
 </header>
 
 <section class="hero dark" aria-labelledby="hTitle">
